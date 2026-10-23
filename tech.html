@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech Lab — Portafolio</title>
+  <meta name="description" content="Proyecto de programación: software, páginas web y videojuegos.">
+  <meta name="theme-color" content="#060607">
+  <meta name="author" content="Daniel Oquendo">
+  <meta name="copyright" content="© 2026 Daniel Oquendo. Todos los derechos reservados.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; frame-src https://secretcodelabb.github.io; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <link rel="icon" href="assets/brand/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Chakra+Petch:ital,wght@0,400;0,500;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="tp">
+
+  <!-- ====== CAPAS GLOBALES ====== -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ====== NAV ====== -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" data-cursor="Inicio">
+      <img src="assets/brand/logo.png" alt="Logo">
+      <span class="nav__name mono" data-bind="name"></span>
+    </a>
+    <a href="index.html#tech" class="tp-back btn btn--ghost magnetic" data-cursor="Volver">← Tech Lab</a>
+  </header>
+
+  <main id="top">
+    <!-- Se rellena desde assets/js/data.js (bloque tech.projects) -->
+    <article id="techProject"></article>
+  </main>
+
+  <footer class="footer mono">
+    <span>© <span id="year"></span> Daniel Oquendo · Todos los derechos reservados</span>
+    <span data-bind="location"></span>
+    <a href="#top" class="magnetic">Volver arriba ↑</a>
+  </footer>
+
+  <!-- ====== LIGHTBOX ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox__btn lightbox__close" id="lbClose" aria-label="Cerrar">✕</button>
+    <button class="lightbox__btn lightbox__prev" id="lbPrev" aria-label="Anterior">←</button>
+    <figure class="lightbox__figure">
+      <img id="lbImg" alt="">
+      <figcaption class="mono"><span id="lbCaption"></span><span id="lbCount"></span></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__next" id="lbNext" aria-label="Siguiente">→</button>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/tech.js"></script>
+</body>
+</html>

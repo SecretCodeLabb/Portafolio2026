@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portafolio 3D — Arte Digital</title>
+  <meta name="description" content="Portafolio de arte 3D: visualización automotriz, props, personajes, producto y motion.">
+  <meta name="theme-color" content="#060607">
+  <meta name="author" content="Daniel Oquendo">
+  <meta name="copyright" content="© 2026 Daniel Oquendo. Todos los derechos reservados.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; frame-src https://secretcodelabb.github.io; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <link rel="icon" href="assets/brand/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Chakra+Petch:ital,wght@0,400;0,500;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- ====== PRELOADER ====== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <img class="loader__logo" src="assets/brand/logo.png" alt="">
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <div class="loader__meta mono">
+      <span>COMPILANDO ESCENA</span>
+      <span id="loaderCount">000</span>
+    </div>
+  </div>
+
+  <!-- ====== CAPAS GLOBALES ====== -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ====== NAV ====== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" data-cursor="Inicio">
+      <img src="assets/brand/logo.png" alt="Logo">
+      <span class="nav__name mono" data-bind="name"></span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#sobre-mi"><span class="mono">01</span>Sobre mí</a>
+      <a href="#trabajos"><span class="mono">02</span>Trabajos</a>
+      <a href="#reel"><span class="mono">03</span>Reel</a>
+      <a href="#tech"><span class="mono">04</span>Tech</a>
+      <a href="#contacto"><span class="mono">05</span>Contacto</a>
+    </nav>
+    <div class="nav__meta mono">
+      <span class="dot"></span><span id="clock">--:--</span>
+    </div>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+
+    <!-- ====== HERO ====== -->
+    <section class="hero">
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+      <div class="hero__copy">
+        <p class="eyebrow mono reveal"><span class="dot"></span> <span data-bind="availability"></span></p>
+        <h1 class="hero__title">
+          <span class="line"><span class="chrome">Forma,</span></span>
+          <span class="line"><span class="serif">luz &amp;</span> <span class="chrome">materia</span></span>
+          <span class="line"><span class="outline">en 3D</span></span>
+        </h1>
+        <p class="hero__lead reveal">
+          <span data-bind="role"></span> — visualización automotriz, props, personajes y producto — y también código y videojuegos.
+          Renders que se sienten <em class="serif">tangibles</em>.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#trabajos" class="btn btn--chrome magnetic" data-cursor="Ver">Ver trabajos</a>
+          <a href="#reel" class="btn btn--ghost magnetic" data-cursor="Play">▶ Showreel</a>
+        </div>
+      </div>
+
+      <!-- Viewport estilo software 3D -->
+      <div class="viewport reveal" id="viewport" data-cursor="Abrir">
+        <div class="viewport__bar mono">
+          <span>VIEWPORT · PERSP</span>
+          <span id="vpCam">CAM_01</span>
+        </div>
+        <div class="viewport__stage" id="vpStage"></div>
+        <div class="viewport__hud mono">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <span class="cross"></span>
+          <div class="viewport__info">
+            <span id="vpTitle">—</span>
+            <span id="vpCat">—</span>
+          </div>
+          <div class="viewport__render">
+            <span id="vpStatus">RENDER</span>
+            <div class="viewport__meter"><span id="vpMeter"></span></div>
+            <span id="vpPct">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll mono" aria-hidden="true">
+        <span>SCROLL</span><i></i>
+      </div>
+    </section>
+
+    <!-- ====== SOBRE MÍ ====== -->
+    <section class="section about" id="sobre-mi">
+      <div class="section__head">
+        <p class="section__index mono">01 / Sobre mí</p>
+      </div>
+      <div class="about__grid">
+        <div class="about__mark">
+          <div class="about__logo" id="aboutLogo">
+            <img src="assets/brand/logo.png" alt="Logo personal">
+          </div>
+          <div class="about__stats" id="stats"></div>
+        </div>
+        <div class="about__text">
+          <h2 class="about__title">
+            <span class="serif">Hola, soy</span><br>
+            <span class="chrome" data-bind="name"></span>
+          </h2>
+          <div class="about__bio" id="bio"></div>
+
+          <blockquote class="statement">
+            <h3 class="skills__title mono">// Statement de artista</h3>
+            <div id="statement"></div>
+          </blockquote>
+
+          <div class="skills">
+            <h3 class="skills__title mono">// Software</h3>
+            <ul class="skills__bars" id="software"></ul>
+            <h3 class="skills__title mono">// Disciplinas</h3>
+            <ul class="skills__tags" id="disciplines"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="process">
+        <h3 class="skills__title mono">// Pipeline</h3>
+        <ol class="process__list" id="process"></ol>
+      </div>
+    </section>
+
+    <!-- ====== TRABAJOS ====== -->
+    <section class="section work" id="trabajos">
+      <div class="section__head">
+        <p class="section__index mono">02 / Trabajos</p>
+        <h2 class="section__title">
+          <span class="chrome">Proyectos</span> <span class="serif">seleccionados</span>
+          <sup class="mono" id="workCount">00</sup>
+        </h2>
+      </div>
+
+      <div class="work__toolbar">
+        <div class="filters" id="filters" role="tablist" aria-label="Filtrar por categoría"></div>
+        <div class="viewtoggle" role="group" aria-label="Vista">
+          <button class="is-active" data-view="list" aria-pressed="true">Lista</button>
+          <button data-view="grid" aria-pressed="false">Grid</button>
+        </div>
+      </div>
+
+      <div class="work__list" id="workList" data-view="list"></div>
+      <div class="hover-preview" id="hoverPreview" aria-hidden="true"><img alt=""></div>
+    </section>
+
+    <!-- ====== REEL ====== -->
+    <section class="section reel" id="reel">
+      <div class="section__head">
+        <p class="section__index mono">03 / Showreel</p>
+        <h2 class="section__title"><span class="serif">En</span> <span class="chrome">movimiento</span></h2>
+      </div>
+      <div class="reel__frame" id="reelFrame" data-cursor="Play">
+        <video id="reelVideo" src="assets/video/gtr-reel.mp4" poster="assets/video/gtr-reel-poster.webp" muted loop playsinline preload="metadata"></video>
+        <div class="reel__overlay">
+          <button class="reel__play" id="reelPlay" aria-label="Reproducir reel">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="reel__meta mono">
+            <span>GT-R NISMO — TURNTABLE</span>
+            <span id="reelTime">00:00 / 00:00</span>
+          </div>
+        </div>
+        <div class="reel__progress"><span id="reelProgress"></span></div>
+      </div>
+      <div class="reel__clips">
+        <p class="reel__note"><span class="mono">// Motion</span><span class="serif">Pasa el cursor para reproducir, clic para ver el proyecto.</span></p>
+        <button class="clip magnetic" data-open="rolex" data-cursor="Abrir">
+          <video src="assets/video/rolex.mp4" poster="assets/video/rolex-poster.webp" muted loop playsinline preload="none"></video>
+          <span class="clip__label mono">Rolex · motion</span>
+        </button>
+        <button class="clip clip--vertical magnetic" data-open="cadenas" data-cursor="Abrir">
+          <video src="assets/video/cadenas.mp4" poster="assets/video/cadenas-poster.webp" muted loop playsinline preload="none"></video>
+          <span class="clip__label mono">Cadenas · loop</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====== ARCHIVO (arrastrable) ====== -->
+    <section class="section archive">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="section__index mono">— Archivo de renders</p>
+          <h2 class="section__title section__title--sm"><span class="outline">Arrastra</span> <span class="serif">para explorar</span></h2>
+        </div>
+        <p class="archive__hint mono">← DRAG / SHIFT+SCROLL →</p>
+      </div>
+      <div class="archive__strip" id="archive" data-cursor="Arrastra"></div>
+    </section>
+
+    <!-- ====== TECH LAB ====== -->
+    <section class="section tech" id="tech">
+      <div class="section__head section__head--row">
+        <div>
+          <p class="section__index mono">04 / Tech Lab</p>
+          <h2 class="section__title"><span class="chrome">Código</span> <span class="serif">&amp; videojuegos</span></h2>
+        </div>
+        <p class="tech__intro reveal" id="techIntro"></p>
+      </div>
+
+      <div class="tech__top">
+        <div class="terminal reveal" id="terminal" aria-label="Terminal">
+          <div class="terminal__bar mono">
+            <span class="terminal__dots"><i></i><i></i><i></i></span>
+            <span>~/lab — zsh</span>
+            <span id="termClock"></span>
+          </div>
+          <pre class="terminal__body" id="termBody"><span class="terminal__caret"></span></pre>
+        </div>
+        <div class="tech__stack" id="techStack"></div>
+      </div>
+
+      <div class="work__toolbar tech__toolbar">
+        <div class="filters" id="techFilters" role="tablist" aria-label="Filtrar proyectos tech"></div>
+        <span class="mono tech__count" id="techCount"></span>
+      </div>
+      <div class="tech__cards" id="techCards"></div>
+    </section>
+
+    <!-- ====== CONTACTO ====== -->
+    <section class="section contact" id="contacto">
+      <p class="section__index mono">05 / Contacto</p>
+      <h2 class="contact__title">
+        <span class="serif">¿Tienes un</span><br>
+        <span class="chrome">proyecto?</span>
+      </h2>
+      <ul class="contact__socials" id="socials"></ul>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© <span id="year"></span> Daniel Oquendo · Todos los derechos reservados</span>
+    <span data-bind="location"></span>
+    <a href="#top" class="magnetic">Volver arriba ↑</a>
+  </footer>
+
+  <!-- ====== DETALLE DE PROYECTO ====== -->
+  <div class="project" id="project" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="pTitle">
+    <div class="project__wipe"></div>
+    <div class="project__scroll" id="projectScroll">
+      <button class="project__close magnetic" id="projectClose" aria-label="Cerrar proyecto" data-cursor="Cerrar">
+        <span></span><span></span>
+      </button>
+      <div class="project__inner" id="projectInner"></div>
+    </div>
+  </div>
+
+  <!-- ====== LIGHTBOX ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox__btn lightbox__close" id="lbClose" aria-label="Cerrar">✕</button>
+    <button class="lightbox__btn lightbox__prev" id="lbPrev" aria-label="Anterior">←</button>
+    <figure class="lightbox__figure" id="lbFigure">
+      <img id="lbImg" alt="">
+      <figcaption class="mono"><span id="lbCaption"></span><span id="lbCount"></span></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__next" id="lbNext" aria-label="Siguiente">→</button>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

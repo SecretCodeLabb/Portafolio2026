@@ -1,0 +1,24 @@
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+
+# Python (tools/)
+__pycache__/
+*.pyc
+
+# Originales pesados: solo se publican las versiones optimizadas de assets/
+*.mov
+*.psd
+*.blend
+*.blend1
+*.exr
+
+# Secretos (nunca subir)
+.env
+*.key
+*.pem
